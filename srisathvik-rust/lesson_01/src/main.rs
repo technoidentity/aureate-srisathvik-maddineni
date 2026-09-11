@@ -1,3 +1,5 @@
 fn main() {
-    println!("Hello, world!");
+    let learner_name = "Srisathvik";
+
+    println!("Hello, {learner_name}!");
 }
