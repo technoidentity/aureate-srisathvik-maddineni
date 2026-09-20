@@ -1,49 +1,25 @@
-struct User {
-    active: bool,
-    username: String,
-    email: String,
-    sign_in_count: u64,
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
-
-struct Color(i32, i32, i32);
-
-struct Point(i32, i32, i32);
-
-struct AlwaysEqual;
 
 fn main() {
-    let first_user = build_user(
-        String::from("srisathvik"),
-        String::from("first@example.com"),
-    );
+    let scale = 2;
 
-    let second_user = User {
-        email: String::from("second@example.com"),
-        ..first_user
+    let rectangle = Rectangle {
+        width: dbg!(30 * scale),
+        height: 50,
     };
 
-    println!("Second username: {}", second_user.username);
-    println!("Second email: {}", second_user.email);
-    println!("Second user active: {}", second_user.active);
-    println!("Second user sign-in count: {}", second_user.sign_in_count);
+    dbg!(&rectangle);
 
-    let black = Color(0, 0, 0);
-    let origin = Point(0, 0, 0);
-    let _subject = AlwaysEqual;
-
-    println!("Black RGB: {}, {}, {}", black.0, black.1, black.2);
     println!(
-        "Origin coordinates: {}, {}, {}",
-        origin.0, origin.1, origin.2
+        "The area of the rectangle is {} square pixels.",
+        area(&rectangle)
     );
-    println!("Created a unit-like AlwaysEqual value.");
 }
 
-fn build_user(username: String, email: String) -> User {
-    User {
-        active: true,
-        username,
-        email,
-        sign_in_count: 1,
-    }
+fn area(rectangle: &Rectangle) -> u32 {
+    rectangle.width * rectangle.height
 }
