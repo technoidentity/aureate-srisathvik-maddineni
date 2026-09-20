@@ -1,13 +1,11 @@
 fn main() {
-    let message = String::from("hello");
+    let message = create_message();
 
-    let (message, length) = calculate_length(message);
-
-    println!("The length of '{message}' is {length}.");
+    println!("{message}");
 }
 
-fn calculate_length(text: String) -> (String, usize) {
-    let length = text.len();
+fn create_message() -> String {
+    let message = String::from("hello");
 
-    (text, length)
+    message
 }
