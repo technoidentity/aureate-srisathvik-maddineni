@@ -4,22 +4,40 @@ struct Rectangle {
     height: u32,
 }
 
-fn main() {
-    let scale = 2;
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
 
-    let rectangle = Rectangle {
-        width: dbg!(30 * scale),
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.width > other.width && self.height > other.height
+    }
+}
+
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+
+fn main() {
+    let large = Rectangle {
+        width: 30,
         height: 50,
     };
 
-    dbg!(&rectangle);
+    let small = Rectangle {
+        width: 10,
+        height: 40,
+    };
 
-    println!(
-        "The area of the rectangle is {} square pixels.",
-        area(&rectangle)
-    );
-}
+    let square = Rectangle::square(20);
 
-fn area(rectangle: &Rectangle) -> u32 {
-    rectangle.width * rectangle.height
+    println!("Large area: {}", large.area());
+    println!("Can large hold small? {}", large.can_hold(&small));
+    println!("Square: {square:#?}");
+    println!("Square area: {}", square.area());
 }
