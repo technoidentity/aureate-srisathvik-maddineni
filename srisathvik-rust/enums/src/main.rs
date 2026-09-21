@@ -1,21 +1,13 @@
 fn main() {
-    let dice_roll = 9;
-
-    match dice_roll {
-        3 => add_fancy_hat(),
-        7 => remove_fancy_hat(),
-        _ => reroll(),
-    }
+    describe_number(Some(42));
+    describe_number(None);
 }
 
-fn add_fancy_hat() {
-    println!("Added a fancy hat.");
-}
+fn describe_number(optional_number: Option<i32>) {
+    let Some(number) = optional_number else {
+        println!("No number was provided.");
+        return;
+    };
 
-fn remove_fancy_hat() {
-    println!("Removed the fancy hat.");
-}
-
-fn reroll() {
-    println!("Roll again.");
+    println!("The number is {number}.");
 }
