@@ -1,12 +1,21 @@
 fn main() {
-    let number = 5;
+    let dice_roll = 9;
 
-    let present_number = Some(10);
-    let present_value = present_number.unwrap_or(0);
+    match dice_roll {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        _ => reroll(),
+    }
+}
 
-    let absent_number: Option<i32> = None;
-    let absent_value = absent_number.unwrap_or(0);
+fn add_fancy_hat() {
+    println!("Added a fancy hat.");
+}
 
-    println!("Present result: {}", number + present_value);
-    println!("Absent result: {}", number + absent_value);
+fn remove_fancy_hat() {
+    println!("Removed the fancy hat.");
+}
+
+fn reroll() {
+    println!("Roll again.");
 }
