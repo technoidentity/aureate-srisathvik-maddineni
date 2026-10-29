@@ -30,13 +30,28 @@ mod tests {
     }
 
     #[test]
-    fn factors_of_3_and_5() {
-        assert_eq!(raindrops(30), "PlingPlang");
+    fn factor_of_5() {
+        assert_eq!(raindrops(25), "Plang");
     }
 
     #[test]
     fn factor_of_7() {
         assert_eq!(raindrops(28), "Plong");
+    }
+
+    #[test]
+    fn factors_of_3_and_5() {
+        assert_eq!(raindrops(30), "PlingPlang");
+    }
+
+    #[test]
+    fn factors_of_3_and_7() {
+        assert_eq!(raindrops(21), "PlingPlong");
+    }
+
+    #[test]
+    fn factors_of_5_and_7() {
+        assert_eq!(raindrops(35), "PlangPlong");
     }
 
     #[test]
