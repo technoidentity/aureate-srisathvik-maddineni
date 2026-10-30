@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -u
+
+repository_root=$(git rev-parse --show-toplevel)
+cd "$repository_root" || exit 1
+
+echo "Checking Rust formatting..."
+
+while IFS= read -r -d '' rust_file; do
+    if ! rustfmt --edition 2024 --check "$rust_file"; then
+        echo "Formatting failed: $rust_file"
+        echo "Run rustfmt on the file and try again."
+        exit 1
+    fi
+done < <(
+    find srisathvik-rust \
+        -type f \
+        -name '*.rs' \
+        -not -path '*/target/*' \
+        -print0
+)
+
+echo "Formatting passed."
+echo "Running Rust tests..."
+
+while IFS= read -r manifest; do
+    project=$(dirname "$manifest")
+    echo "Testing: $project"
+
+    if ! cargo test --quiet --manifest-path "$manifest"; then
+        echo "Tests failed: $project"
+        echo "Commit stopped."
+        exit 1
+    fi
+done < <(
+    find srisathvik-rust \
+        -name Cargo.toml \
+        -not -path '*/target/*' |
+    sort
+)
+
+echo "All formatting checks and tests passed."
