@@ -1,9 +1,5 @@
 fn choose_number(condition: bool) -> i32 {
-    if condition {
-        5
-    } else {
-        6
-    }
+    if condition { 5 } else { 6 }
 }
 
 fn main() {
