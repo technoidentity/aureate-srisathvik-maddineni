@@ -1,0 +1,59 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - develop
+      - Srisathvik
+      - "feat/**"
+  pull_request:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test ${{ matrix.project }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - branches
+          - comments
+          - data_types
+          - enums
+          - fibonacci
+          - functions
+          - guessing_game
+          - lesson_01
+          - loops
+          - ownership
+          - rust-generics-lab
+          - structs
+          - temperature_converter
+          - twelve_days
+          - variables
+          - exercism-lab/rust/hello-world
+          - exercism-lab/rust/leap
+          - exercism-lab/rust/raindrops
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Check formatting
+        working-directory: srisathvik-rust/${{ matrix.project }}
+        run: cargo fmt --all -- --check
+
+      - name: Run tests
+        working-directory: srisathvik-rust/${{ matrix.project }}
+        run: cargo test --all-targets
