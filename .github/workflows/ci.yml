@@ -34,6 +34,7 @@ jobs:
           - ownership
           - rust-generics-lab
           - structs
+          - tdd-money
           - temperature_converter
           - twelve_days
           - variables
